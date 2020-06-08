@@ -19,6 +19,7 @@ class Complete extends Component {
         const templateId = 'template_D0IjdUjO';
 
         this.sendFeedback(templateId, {message_html: this.state.feedback, from_name: this.state.name, reply_to: this.state.email})
+        window.location.replace('https://www.sproutstory.co/en/')
     }
 
     sendFeedback (templateId, variables) {
@@ -58,7 +59,7 @@ class Complete extends Component {
                     >
                         Back
                     </Button>{' '}
-                    <Button variant="primary" onClick={this.handleSubmit()}>Complete</Button>
+                    <Button variant="primary"  onClick={() => this.handleSubmit()}>Complete</Button>
 
                 </Card.Body>
                 <Card.Footer className="text-muted">Thank you</Card.Footer>
