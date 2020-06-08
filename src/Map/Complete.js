@@ -4,14 +4,14 @@ import { ListGroup ,Card,Button } from 'react-bootstrap';
 class Complete extends Component {
     constructor(props) {
         super(props);
-        this.state = { feedback: 'xxxxxxxx', name: 'Name', email: 'email@example.com' };
+        this.state = { feedback: 'Error', name: 'Name', email: 'email@example.com' };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentWillMount () {
         const temp = this.props.location.combineState
         const {address, form, distance, state1, markerPosition} = temp
         this.setState({feedback: `จุดรับของ : ${state1.address}\nรายละเอียดเพิ่มเติม: ${state1.form.senderDesOption}\nชื่อผู้ส่งของ : ${state1.form.senderName}\nโทร. ผู้ส่งของ : ${state1.form.senderPhoneNumber}\n
-        จุดส่งของ : ${address} \\nรายละเอียดเพิ่มเติม : ${form.recieverDesOption}\\nชื่อผู้รับของ : ${form.recieverName} \\nโทร. ผู้รับของ : ${form.recieverPhoneNumber}\n
+        จุดส่งของ : ${address} \nรายละเอียดเพิ่มเติม : ${form.recieverDesOption}\nชื่อผู้รับของ : ${form.recieverName} \nโทร. ผู้รับของ : ${form.recieverPhoneNumber}\n
         แผนที่ https://www.google.com/maps/dir/'${state1.markerPosition.lat},${state1.markerPosition.lng}'/'${markerPosition.lat},${markerPosition.lng}'/`})
     }
 
@@ -19,6 +19,10 @@ class Complete extends Component {
         const templateId = 'template_D0IjdUjO';
 
         this.sendFeedback(templateId, {message_html: this.state.feedback, from_name: this.state.name, reply_to: this.state.email})
+        
+
+    }
+    gotosprout(){
         window.location.replace('https://www.sproutstory.co/en/')
     }
 
