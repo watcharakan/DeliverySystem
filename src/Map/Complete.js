@@ -7,7 +7,7 @@ class Complete extends Component {
         this.state = { feedback: 'xxxxxxxx', name: 'Name', email: 'email@example.com' };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    componentDidMount() {
+    componentWillMount () {
         const temp = this.props.location.combineState
         const {address, form, distance, state1, markerPosition} = temp
         this.setState({feedback: `จุดรับของ : ${state1.address}\nรายละเอียดเพิ่มเติม: ${state1.form.senderDesOption}\nชื่อผู้ส่งของ : ${state1.form.senderName}\nโทร. ผู้ส่งของ : ${state1.form.senderPhoneNumber}\n
