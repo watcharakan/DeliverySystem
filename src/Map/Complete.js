@@ -4,17 +4,37 @@ import { ListGroup ,Card,Button } from 'react-bootstrap';
 class Complete extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            pay: null,
-
-
-        }
+        this.state = { feedback: 'xxxxxxxx', name: 'Name', email: 'email@example.com' };
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    componentDidMount() {
+        const temp = this.props.location.combineState
+        const {address, form, distance, state1, markerPosition} = temp
+        this.setState({feedback: `จุดรับของ : ${state1.address}\nรายละเอียดเพิ่มเติม: ${state1.form.senderDesOption}\nชื่อผู้ส่งของ : ${state1.form.senderName}\nโทร. ผู้ส่งของ : ${state1.form.senderPhoneNumber}\n
+        จุดส่งของ : ${address} \\nรายละเอียดเพิ่มเติม : ${form.recieverDesOption}\\nชื่อผู้รับของ : ${form.recieverName} \\nโทร. ผู้รับของ : ${form.recieverPhoneNumber}\n
+        แผนที่ https://www.google.com/maps/dir/'${state1.markerPosition.lat},${state1.markerPosition.lng}'/'${markerPosition.lat},${markerPosition.lng}'/`})
     }
 
+    handleSubmit (address,form,state1,markerPosition) {
+        const templateId = 'template_D0IjdUjO';
 
+        this.sendFeedback(templateId, {message_html: this.state.feedback, from_name: this.state.name, reply_to: this.state.email})
+    }
+
+    sendFeedback (templateId, variables) {
+        window.emailjs.send(
+            'gmail', templateId,
+            variables
+        ).then(res => {
+            console.log('Email successfully sent!')
+        })
+            // Handle errors here however you like, or use a React error boundary
+            .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
+    }
     render() {
         const temp = this.props.location.combineState
         const {address, form, distance, state1, markerPosition} = temp
+
         return(
             <Card className="text-center">
                 <Card.Header>Sprout  Delivery </Card.Header>
@@ -38,7 +58,8 @@ class Complete extends Component {
                     >
                         Back
                     </Button>{' '}
-                    <Button variant="primary">Complete</Button>
+                    <Button variant="primary" onClick={(e) =>this.handleSubmit(address,form,state1,markerPosition)}>Complete</Button>
+
                 </Card.Body>
                 <Card.Footer className="text-muted">Thank you</Card.Footer>
             </Card>
