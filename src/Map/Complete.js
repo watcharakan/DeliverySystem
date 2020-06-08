@@ -15,7 +15,7 @@ class Complete extends Component {
         แผนที่ https://www.google.com/maps/dir/'${state1.markerPosition.lat},${state1.markerPosition.lng}'/'${markerPosition.lat},${markerPosition.lng}'/`})
     }
 
-    handleSubmit (address,form,state1,markerPosition) {
+    handleSubmit () {
         const templateId = 'template_D0IjdUjO';
 
         this.sendFeedback(templateId, {message_html: this.state.feedback, from_name: this.state.name, reply_to: this.state.email})
@@ -58,7 +58,7 @@ class Complete extends Component {
                     >
                         Back
                     </Button>{' '}
-                    <Button variant="primary" onClick={(e) =>this.handleSubmit(address,form,state1,markerPosition)}>Complete</Button>
+                    <Button variant="primary" onClick={this.handleSubmit()}>Complete</Button>
 
                 </Card.Body>
                 <Card.Footer className="text-muted">Thank you</Card.Footer>
